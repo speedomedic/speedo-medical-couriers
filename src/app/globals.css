@@ -1,26 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ── Brand Colors (from logo) ───────────────── */
+  --color-brand-blue: #1B6FEB;
+  --color-brand-blue-dark: #0D5BD4;
+  --color-brand-blue-light: #4D93F0;
+  --color-brand-blue-pale: #EBF3FF;
+  --color-brand-navy: #0D1B3E;
+  --color-brand-navy-light: #1A2E5F;
+  --color-brand-red: #E5191E;
+  --color-brand-red-dark: #C01218;
+  --color-brand-red-pale: #FEE2E2;
+
+  /* ── Semantic ───────────────────────────────── */
+  --color-primary: #1B6FEB;
+  --color-primary-dark: #0D5BD4;
+  --color-primary-pale: #EBF3FF;
+  --color-accent: #E5191E;
+  --color-accent-pale: #FEE2E2;
+  --color-destructive: #DC2626;
+
+  /* ── Surface ────────────────────────────────── */
+  --color-bg: #FFFFFF;
+  --color-bg-subtle: #F7F9FC;
+  --color-surface: #FFFFFF;
+  --color-muted: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-border-light: #F1F5F9;
+  --color-text: #0D1B3E;
+  --color-text-muted: #64748B;
+  --color-text-light: #94A3B8;
+
+  /* ── Fonts ──────────────────────────────────── */
+  --font-heading: 'Figtree', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* ── Shadows ────────────────────────────────── */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(13,27,62,0.07);
+  --shadow-card-hover: 0 8px 40px rgba(27,111,235,0.15);
+  --shadow-nav: 0 4px 24px rgba(13,27,62,0.10);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 800;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Keyframes ──────────────────────────────────────── */
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.8); opacity: 0; }
+}
+@keyframes dash-flow {
+  to { stroke-dashoffset: -20; }
+}
+@keyframes route-draw {
+  from { stroke-dashoffset: 300; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* ── Utility Classes ────────────────────────────────── */
+.animate-ticker        { animation: ticker 32s linear infinite; }
+.animate-fade-up       { animation: fadeUp 0.6s ease both; }
+.animate-fade-in       { animation: fadeIn 0.5s ease both; }
+.animate-float         { animation: float 5s ease-in-out infinite; }
+.animate-float-delayed { animation: float 5s ease-in-out infinite 2s; }
+.animate-dash          { animation: dash-flow 1.2s linear infinite; }
+.animate-route         { animation: route-draw 2s ease forwards; }
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* Section badge — brand blue */
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-brand-blue-pale);
+  color: var(--color-brand-blue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 99px;
+  border: 1px solid rgba(27,111,235,0.2);
+}
+
+/* Feature card — clean premium */
+.feature-card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(27,111,235,0.25);
+}
+
+/* Glassmorphism */
+.glass-card {
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Gradient heading — navy → blue */
+.gradient-text {
+  background: linear-gradient(135deg, #1B6FEB 0%, #4D93F0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Brand gradient — blue to red (unique Speedo identity) */
+.gradient-text-brand {
+  background: linear-gradient(135deg, #1B6FEB 0%, #E5191E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Stat card */
+.stat-card {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+/* Pricing popular */
+.pricing-popular {
+  box-shadow: 0 0 0 2px var(--color-brand-blue), 0 24px 60px rgba(27,111,235,0.2);
+}
+
+/* Card hover */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Dot grid hero bg */
+.dot-grid {
+  background-image: radial-gradient(circle, #CBD5E1 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Medical cross pattern bg */
+.medical-pattern {
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(27,111,235,0.06) 0%, transparent 60%),
+    radial-gradient(circle at 80% 20%, rgba(229,25,30,0.04) 0%, transparent 50%);
+}
+
+/* Hero grid overlay for dark sections */
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* 3D Map perspective wrapper */
+.map-3d-wrapper {
+  perspective: 700px;
+  perspective-origin: 50% 20%;
+}
+.map-3d-inner {
+  transform: rotateX(30deg);
+  transform-origin: center 70%;
+  transform-style: preserve-3d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker, .animate-fade-up, .animate-fade-in,
+  .animate-float, .animate-dash, .animate-route {
+    animation: none !important;
+  }
 }
