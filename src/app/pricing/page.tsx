@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CheckCircle, ArrowRight, Phone, Zap, RefreshCw, Building2 } from "lucide-react";
+import PriceCalculator from "@/components/PriceCalculator";
 
 export const metadata = {
   title: "Pricing | Speedo Medical Couriers",
@@ -169,8 +170,24 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Zone pricing */}
+      {/* Rate calculator */}
       <section className="py-20 bg-[#F8FAFC]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <p className="text-[var(--color-brand-blue)] text-xs font-black uppercase tracking-[0.18em] mb-3">Interactive Tool</p>
+            <h2 className="text-4xl font-black text-[var(--color-text)]">
+              Calculate your estimate
+            </h2>
+            <p className="text-[var(--color-text-muted)] mt-3 max-w-lg mx-auto">
+              Select your business type, delivery frequency, and cargo requirements to see a real-time cost estimate — then lock in your route rate.
+            </p>
+          </div>
+          <PriceCalculator />
+        </div>
+      </section>
+
+      {/* Zone pricing */}
+      <section className="py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
             <p className="text-[var(--color-brand-blue)] text-xs font-black uppercase tracking-[0.18em] mb-3">Service Zones</p>
