@@ -139,12 +139,22 @@ export async function createOrder(payload: ShipdayCreatePayload): Promise<Shipda
 }
 
 /**
- * Look up an order by our order number (e.g. SMC-1234567890).
+ * Look up a Shipday order by numeric orderId.
+ * Order numbers use format SMC-{orderId} so we extract the numeric ID.
  * Returns null if not found.
  */
-export async function getOrder(orderNumber: string): Promise<ShipdayTrackingResult | null> {
+export async function getOrder(orderNumberOrId: string): Promise<ShipdayTrackingResult | null> {
+  // Extract numeric Shipday ID from "SMC-12345" or accept raw numeric string
+  const numeric = orderNumberOrId.replace(/^SMC-/i, "");
+  const shipdayId = parseInt(numeric, 10);
+
+  if (isNaN(shipdayId)) {
+    // Fall back to searching all active orders by custom orderNumber
+    return getOrderBySearch(orderNumberOrId);
+  }
+
   const res = await fetch(
-    `${SHIPDAY_BASE}/orders/${encodeURIComponent(orderNumber)}`,
+    `${SHIPDAY_BASE}/orders/${shipdayId}`,
     { headers: { Authorization: authHeader() } }
   );
 
@@ -154,17 +164,38 @@ export async function getOrder(orderNumber: string): Promise<ShipdayTrackingResu
   const json = await res.json();
   const data = json.data ?? json;
 
+  return normaliseOrder(data);
+}
+
+/**
+ * Fallback: search active orders list for matching orderNumber field.
+ */
+async function getOrderBySearch(orderNumber: string): Promise<ShipdayTrackingResult | null> {
+  const res = await fetch(`${SHIPDAY_BASE}/orders`, {
+    headers: { Authorization: authHeader() },
+  });
+  if (!res.ok) return null;
+
+  const json = await res.json();
+  const list: Record<string, unknown>[] = json.data ?? json ?? [];
+  const match = list.find(
+    (o) => (o.orderNumber as string)?.toUpperCase() === orderNumber.toUpperCase()
+  );
+  return match ? normaliseOrder(match) : null;
+}
+
+function normaliseOrder(data: Record<string, unknown>): ShipdayTrackingResult {
   return {
-    orderId:              data.orderId               ?? 0,
-    orderNumber:          data.orderNumber            ?? orderNumber,
-    status:               data.orderStatus            ?? data.status ?? "UNKNOWN",
-    trackingLink:         data.trackingLink           ?? data.tracking_link ?? "",
-    driverName:           data.carrierName            ?? data.driverName,
-    driverPhone:          data.carrierPhone           ?? data.driverPhone,
-    estimatedDeliveryTime:data.estimatedDeliveryTime  ?? undefined,
-    customerName:         data.customerName           ?? undefined,
-    customerAddress:      data.customerAddress        ?? undefined,
-    pickupAddress:        data.restaurantAddress      ?? undefined,
+    orderId:               (data.orderId as number)               ?? 0,
+    orderNumber:           (data.orderNumber as string)            ?? "",
+    status:                (data.orderStatus as string)            ?? (data.status as string) ?? "UNKNOWN",
+    trackingLink:          (data.trackingLink as string)           ?? (data.tracking_link as string) ?? "",
+    driverName:            (data.carrierName as string)            ?? (data.driverName as string),
+    driverPhone:           (data.carrierPhone as string)           ?? (data.driverPhone as string),
+    estimatedDeliveryTime: (data.estimatedDeliveryTime as string)  ?? undefined,
+    customerName:          (data.customerName as string)           ?? undefined,
+    customerAddress:       (data.customerAddress as string)        ?? undefined,
+    pickupAddress:         (data.restaurantAddress as string)      ?? undefined,
   };
 }
 
@@ -172,6 +203,15 @@ export async function getOrder(orderNumber: string): Promise<ShipdayTrackingResu
  * Build a Shipday order payload from the booking form fields.
  * Returns both the payload and the generated order number.
  */
+/**
+ * Generate an SMC order number from Shipday's numeric orderId.
+ * Format: SMC-{orderId}  e.g. SMC-12345
+ * This lets the tracking lookup extract the numeric ID directly.
+ */
+export function formatOrderNumber(shipdayOrderId: number): string {
+  return `SMC-${shipdayOrderId}`;
+}
+
 export function buildOrderPayload(form: {
   serviceType:        string;
   pickupName:         string;

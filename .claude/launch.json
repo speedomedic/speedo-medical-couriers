@@ -1,0 +1,13 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "speedo-medical-couriers",
+      "runtimeExecutable": "/Users/owner/.nvm/versions/node/v24.19.0/bin/node",
+      "runtimeArgs": ["node_modules/.bin/next", "dev"],
+      "cwd": "/Users/owner/speedo-medical-couriers",
+      "port": 3000,
+      "autoPort": false
+    }
+  ]
+}

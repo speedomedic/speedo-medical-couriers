@@ -4,6 +4,7 @@ import {
   ArrowRight, CheckCircle, Clock, MapPin, Phone,
   Package, Thermometer, FileText, FlaskConical, Truck,
   AlertCircle, ChevronRight, Heart, RefreshCw, Building2,
+  Hospital, Stethoscope, HeartHandshake, Activity, X,
 } from "lucide-react";
 
 import VideoHero from "@/components/VideoHero";
@@ -146,7 +147,7 @@ const features = [
   { title: "Background Checked",  desc: "Every courier undergoes criminal record checks before joining our team." },
   { title: "Chain of Custody",    desc: "Documented handoffs at every stage — audit-ready records available on demand." },
   { title: "Temperature Control", desc: "Cold-chain packaging for biologics, vaccines, and sensitive medications." },
-  { title: "7 Days a Week",       desc: "We operate 365 days a year so your patients never wait for a weekday." },
+  { title: "Extended Hours",      desc: "Ask us about our availability windows — we work around your operational schedule." },
 ];
 
 const cities = ["Edmonton", "St. Albert", "Sherwood Park", "Leduc", "Spruce Grove", "Fort Saskatchewan", "Beaumont", "Red Deer"];
@@ -177,125 +178,153 @@ export default function HomePage() {
       {/* ══ 3. ANIMATED STATS ═════════════════════════════════ */}
       <AnimatedStats />
 
-      {/* ══ 3a. WHO WE SERVE — Persona Cards ═════════════════ */}
+      {/* ══ 3a. WHO WE SERVE — 6 Healthcare Verticals ════════ */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
             <div>
               <p className="text-[var(--color-brand-blue)] text-xs font-black uppercase tracking-[0.18em] mb-3">Who We Serve</p>
               <h2 className="text-5xl lg:text-6xl font-black text-[var(--color-text)] leading-[1.02]">
-                Healthcare Delivery<br />
-                <span className="text-[var(--color-brand-blue)]">for Every Situation</span>
+                Every Healthcare Setting.<br />
+                <span className="text-[var(--color-brand-blue)]">One Trusted Courier.</span>
               </h2>
             </div>
             <p className="text-lg text-[var(--color-text-muted)] max-w-sm lg:text-right lg:pb-1">
-              Clinic, pharmacy, lab, or patient at home — we built this for you.
+              Pharmacy, lab, hospital, clinic, long-term care, or patient at home — we built this for all of you.
             </p>
           </div>
-          <div className="grid lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
             {/* Pharmacies */}
             <div className="group relative rounded-3xl overflow-hidden border border-[var(--color-border)] hover:border-[var(--color-brand-blue)] hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300">
-              <div className="h-44 relative overflow-hidden bg-gradient-to-br from-blue-600 to-blue-400">
-                <Image
-                  src="https://images.unsplash.com/photo-1563213126-a4273aed2016?auto=format&fit=crop&w=700&q=80"
-                  alt="Pharmacy"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                  className="object-cover mix-blend-overlay opacity-50 group-hover:scale-105 transition-transform duration-500"
-                />
+              <div className="h-40 relative overflow-hidden bg-gradient-to-br from-blue-600 to-blue-400">
+                <Image src="https://images.unsplash.com/photo-1563213126-a4273aed2016?auto=format&fit=crop&w=700&q=80" alt="Pharmacy" fill sizes="(max-width: 1024px) 50vw, 33vw" className="object-cover mix-blend-overlay opacity-50 group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 flex items-end p-5">
-                  <div className="w-11 h-11 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                    <Package size={22} className="text-white" />
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Package size={20} className="text-white" />
                   </div>
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-black text-[var(--color-text)] mb-2">Pharmacies &amp; Drug Stores</h3>
-                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
-                  We pick up directly from your dispensary and deliver to patients — same day.
-                  Recurring routes mean you never need to think about it.
-                </p>
-                <ul className="space-y-2 mb-5">
-                  {["Prescription delivery to patient homes", "Recurring daily/weekly routes", "Cold-chain biologics & vaccines"].map(i => (
-                    <li key={i} className="flex items-center gap-2 text-xs text-[var(--color-text)]">
-                      <CheckCircle size={12} className="text-[var(--color-brand-blue)] flex-shrink-0" /> {i}
-                    </li>
+                <h3 className="text-lg font-black text-[var(--color-text)] mb-2">Pharmacies &amp; Drug Stores</h3>
+                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">Same-day patient delivery direct from your dispensary. Recurring routes so you never think about it.</p>
+                <ul className="space-y-1.5 mb-5">
+                  {["Prescription delivery to patients", "Recurring daily/weekly routes", "Cold-chain biologics & vaccines", "Controlled substance compliance"].map(i => (
+                    <li key={i} className="flex items-center gap-2 text-xs text-[var(--color-text)]"><CheckCircle size={11} className="text-[var(--color-brand-blue)] flex-shrink-0" /> {i}</li>
                   ))}
                 </ul>
-                <Link href="/business" className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--color-brand-blue)] hover:gap-2.5 transition-all">
-                  Set up a pharmacy account <ArrowRight size={13} />
-                </Link>
+                <Link href="/partner" className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--color-brand-blue)] hover:gap-2.5 transition-all">Set up a pharmacy account <ArrowRight size={13} /></Link>
               </div>
             </div>
 
-            {/* Clinics & Labs */}
-            <div className="group relative rounded-3xl overflow-hidden border border-[var(--color-border)] hover:border-[var(--color-brand-blue)] hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300">
-              <div className="h-44 relative overflow-hidden bg-gradient-to-br from-indigo-600 to-sky-400">
-                <Image
-                  src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=700&q=80"
-                  alt="Medical lab"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                  className="object-cover mix-blend-overlay opacity-50 group-hover:scale-105 transition-transform duration-500"
-                />
+            {/* Hospitals & AHS */}
+            <div className="group relative rounded-3xl overflow-hidden border border-[var(--color-border)] hover:border-[var(--color-brand-red)] hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300">
+              <div className="h-40 relative overflow-hidden bg-gradient-to-br from-red-600 to-rose-400">
+                <Image src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=700&q=80" alt="Hospital" fill sizes="(max-width: 1024px) 50vw, 33vw" className="object-cover mix-blend-overlay opacity-50 group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 flex items-end p-5">
-                  <div className="w-11 h-11 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                    <FlaskConical size={22} className="text-white" />
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Hospital size={20} className="text-white" />
+                  </div>
+                </div>
+                <div className="absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wide">AHS Partner</div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-lg font-black text-[var(--color-text)] mb-2">Hospitals &amp; AHS Facilities</h3>
+                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">Cross-facility transport between AHS sites, inter-departmental deliveries, and time-critical patient medication.</p>
+                <ul className="space-y-1.5 mb-5">
+                  {["Cross-facility AHS transfers", "Surgical supply & equipment delivery", "Patient medication between sites", "Urgent STAT response < 60 min"].map(i => (
+                    <li key={i} className="flex items-center gap-2 text-xs text-[var(--color-text)]"><CheckCircle size={11} className="text-[var(--color-brand-red)] flex-shrink-0" /> {i}</li>
+                  ))}
+                </ul>
+                <Link href="/contact" className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--color-brand-red)] hover:gap-2.5 transition-all">Discuss a hospital contract <ArrowRight size={13} /></Link>
+              </div>
+            </div>
+
+            {/* Diagnostic Labs */}
+            <div className="group relative rounded-3xl overflow-hidden border border-[var(--color-border)] hover:border-[var(--color-brand-blue)] hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300">
+              <div className="h-40 relative overflow-hidden bg-gradient-to-br from-indigo-600 to-sky-400">
+                <Image src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=700&q=80" alt="Medical lab" fill sizes="(max-width: 1024px) 50vw, 33vw" className="object-cover mix-blend-overlay opacity-50 group-hover:scale-105 transition-transform duration-500" />
+                <div className="absolute inset-0 flex items-end p-5">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <FlaskConical size={20} className="text-white" />
                   </div>
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-black text-[var(--color-text)] mb-2">Clinics &amp; Diagnostic Labs</h3>
-                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
-                  Time-critical specimen pickups from your collection site to the lab.
-                  WHMIS-trained couriers. Chain of custody every step.
-                </p>
-                <ul className="space-y-2 mb-5">
-                  {["Specimen transport clinic → lab", "Medical records & referral letters", "STAT pickup within 60 minutes"].map(i => (
-                    <li key={i} className="flex items-center gap-2 text-xs text-[var(--color-text)]">
-                      <CheckCircle size={12} className="text-[var(--color-brand-blue)] flex-shrink-0" /> {i}
-                    </li>
+                <h3 className="text-lg font-black text-[var(--color-text)] mb-2">Diagnostic Labs</h3>
+                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">WHMIS-trained couriers moving biohazardous specimens from collection sites to DynaLIFE and partner labs.</p>
+                <ul className="space-y-1.5 mb-5">
+                  {["Clinic-to-lab specimen transport", "Biohazard-compliant handling", "STAT same-day priority pickup", "Chain of custody documented"].map(i => (
+                    <li key={i} className="flex items-center gap-2 text-xs text-[var(--color-text)]"><CheckCircle size={11} className="text-[var(--color-brand-blue)] flex-shrink-0" /> {i}</li>
                   ))}
                 </ul>
-                <Link href="/business" className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--color-brand-blue)] hover:gap-2.5 transition-all">
-                  Open a clinic account <ArrowRight size={13} />
-                </Link>
+                <Link href="/partner" className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--color-brand-blue)] hover:gap-2.5 transition-all">Open a lab account <ArrowRight size={13} /></Link>
+              </div>
+            </div>
+
+            {/* Clinics */}
+            <div className="group relative rounded-3xl overflow-hidden border border-[var(--color-border)] hover:border-[var(--color-brand-blue)] hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300">
+              <div className="h-40 relative overflow-hidden bg-gradient-to-br from-teal-600 to-cyan-400">
+                <Image src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=700&q=80" alt="Clinic" fill sizes="(max-width: 1024px) 50vw, 33vw" className="object-cover mix-blend-overlay opacity-50 group-hover:scale-105 transition-transform duration-500" />
+                <div className="absolute inset-0 flex items-end p-5">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Stethoscope size={20} className="text-white" />
+                  </div>
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-lg font-black text-[var(--color-text)] mb-2">Clinics &amp; Physician Offices</h3>
+                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">Referral letters, specimen drops, prescription forwarding — the everyday logistics your staff shouldn&apos;t be doing.</p>
+                <ul className="space-y-1.5 mb-5">
+                  {["Specimen drops to DynaLIFE", "Referral & records forwarding", "Prescription forwarding to pharmacy", "Same-day urgent pickups"].map(i => (
+                    <li key={i} className="flex items-center gap-2 text-xs text-[var(--color-text)]"><CheckCircle size={11} className="text-[var(--color-brand-blue)] flex-shrink-0" /> {i}</li>
+                  ))}
+                </ul>
+                <Link href="/partner" className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--color-brand-blue)] hover:gap-2.5 transition-all">Set up a clinic account <ArrowRight size={13} /></Link>
+              </div>
+            </div>
+
+            {/* Long-Term Care */}
+            <div className="group relative rounded-3xl overflow-hidden border border-[var(--color-border)] hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
+              <div className="h-40 relative overflow-hidden bg-gradient-to-br from-emerald-600 to-green-400">
+                <Image src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=80" alt="Long-term care" fill sizes="(max-width: 1024px) 50vw, 33vw" className="object-cover mix-blend-overlay opacity-50 group-hover:scale-105 transition-transform duration-500" />
+                <div className="absolute inset-0 flex items-end p-5">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <HeartHandshake size={20} className="text-white" />
+                  </div>
+                </div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-lg font-black text-[var(--color-text)] mb-2">Long-Term Care &amp; Assisted Living</h3>
+                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">Scheduled medication routes to nursing homes and assisted-living facilities — reliable enough to plan your whole week around.</p>
+                <ul className="space-y-1.5 mb-5">
+                  {["Daily/weekly medication routes", "Blister pack & unit-dose delivery", "Dedicated consistent courier", "Flexible window scheduling"].map(i => (
+                    <li key={i} className="flex items-center gap-2 text-xs text-[var(--color-text)]"><CheckCircle size={11} className="text-emerald-600 flex-shrink-0" /> {i}</li>
+                  ))}
+                </ul>
+                <Link href="/partner" className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-600 hover:gap-2.5 transition-all">Set up an LTC route <ArrowRight size={13} /></Link>
               </div>
             </div>
 
             {/* Patients */}
             <div className="group relative rounded-3xl overflow-hidden border border-[var(--color-border)] hover:border-[var(--color-brand-blue)] hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300">
-              <div className="h-44 relative overflow-hidden bg-gradient-to-br from-rose-500 to-orange-400">
-                <Image
-                  src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=700&q=80"
-                  alt="Patient at home"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                  className="object-cover mix-blend-overlay opacity-50 group-hover:scale-105 transition-transform duration-500"
-                />
+              <div className="h-40 relative overflow-hidden bg-gradient-to-br from-rose-500 to-orange-400">
+                <Image src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=700&q=80" alt="Patient at home" fill sizes="(max-width: 1024px) 50vw, 33vw" className="object-cover mix-blend-overlay opacity-50 group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 flex items-end p-5">
-                  <div className="w-11 h-11 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                    <Heart size={22} className="text-white" />
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Heart size={20} className="text-white" />
                   </div>
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-black text-[var(--color-text)] mb-2">Patients &amp; Families</h3>
-                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
-                  Can&apos;t pick up your medication? We bring it to your door.
-                  Affordable, private, and as fast as same-day.
-                </p>
-                <ul className="space-y-2 mb-5">
-                  {["Medication delivered to your home", "Elderly & mobility-limited patients", "Live tracking so you know when to answer"].map(i => (
-                    <li key={i} className="flex items-center gap-2 text-xs text-[var(--color-text)]">
-                      <CheckCircle size={12} className="text-[var(--color-brand-blue)] flex-shrink-0" /> {i}
-                    </li>
+                <h3 className="text-lg font-black text-[var(--color-text)] mb-2">Patients &amp; Families</h3>
+                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">Can&apos;t pick up your medication? We bring it to your door — affordable, private, same-day.</p>
+                <ul className="space-y-1.5 mb-5">
+                  {["Medication delivered to your home", "Elderly & mobility-limited patients", "Live tracking to your door", "Discreet plain-package delivery"].map(i => (
+                    <li key={i} className="flex items-center gap-2 text-xs text-[var(--color-text)]"><CheckCircle size={11} className="text-[var(--color-brand-blue)] flex-shrink-0" /> {i}</li>
                   ))}
                 </ul>
-                <Link href="/book" className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--color-brand-blue)] hover:gap-2.5 transition-all">
-                  Book a one-time delivery <ArrowRight size={13} />
-                </Link>
+                <Link href="/book" className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--color-brand-blue)] hover:gap-2.5 transition-all">Book a delivery <ArrowRight size={13} /></Link>
               </div>
             </div>
 
@@ -406,6 +435,71 @@ export default function HomePage() {
                 <Phone size={15} /> Talk to Us
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ 5. WHY A HEALTHCARE SPECIALIST ═══════════════════ */}
+      <section className="py-24 bg-[#F8FAFC]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
+            <div>
+              <p className="text-[var(--color-brand-blue)] text-xs font-black uppercase tracking-[0.18em] mb-3">Why It Matters</p>
+              <h2 className="text-5xl lg:text-6xl font-black text-[var(--color-text)] leading-[1.02]">
+                Healthcare courier.<br />
+                <span className="text-[var(--color-brand-blue)]">Not a courier that does healthcare.</span>
+              </h2>
+            </div>
+            <p className="text-lg text-[var(--color-text-muted)] max-w-md lg:text-right lg:pb-1">
+              General couriers handle boxes. We handle chain-of-custody, cold-chain, WHMIS compliance, biohazard protocols, and STAT response — purpose-built for healthcare.
+            </p>
+          </div>
+
+          {/* Vs table callout */}
+          <div className="bg-white rounded-3xl border border-[var(--color-border)] overflow-hidden mb-8">
+            <div className="grid grid-cols-3 text-sm font-black uppercase tracking-widest">
+              <div className="p-5 text-[var(--color-text-muted)] border-b border-[var(--color-border)]">Capability</div>
+              <div className="p-5 text-center text-[var(--color-text-muted)] bg-[#F8FAFC] border-b border-l border-[var(--color-border)]">General Courier</div>
+              <div className="p-5 text-center text-[var(--color-brand-blue)] border-b border-l border-[var(--color-border)]">Speedo Medical</div>
+            </div>
+            {[
+              ["WHMIS biohazard training", false, true],
+              ["Cold-chain & temperature monitoring", false, true],
+              ["Chain-of-custody documentation", false, true],
+              ["STAT dispatch (< 60 min)", false, true],
+              ["Healthcare-specialist focus", false, true],
+              ["Healthcare-only focus", false, true],
+            ].map(([label, general, speedo]) => (
+              <div key={label as string} className="grid grid-cols-3 border-b border-[var(--color-border)] last:border-0">
+                <div className="p-4 text-sm text-[var(--color-text)] flex items-center">{label as string}</div>
+                <div className="p-4 flex items-center justify-center border-l border-[var(--color-border)] bg-[#F8FAFC]">
+                  {general ? <CheckCircle size={18} className="text-emerald-500" /> : <X size={18} className="text-red-400" />}
+                </div>
+                <div className="p-4 flex items-center justify-center border-l border-[var(--color-border)]">
+                  {speedo ? <CheckCircle size={18} className="text-[var(--color-brand-blue)]" /> : <X size={18} className="text-red-400" />}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 6 advantage cards */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { icon: Activity, color: "text-[var(--color-brand-blue)]", bg: "bg-blue-50", title: "STAT Response < 60 Min", body: "When a lab result changes a diagnosis, minutes matter. Our STAT service guarantees dispatch within minutes and delivery in under an hour within Edmonton." },
+              { icon: Thermometer, color: "text-sky-600", bg: "bg-sky-50", title: "Cold-Chain Integrity", body: "Vaccines, biologics, and insulin require precise temperature control. We use medical-grade insulated carriers with temperature logs every step of the way." },
+              { icon: FileText, color: "text-indigo-600", bg: "bg-indigo-50", title: "Chain of Custody", body: "Every pickup and delivery is documented with timestamps, signatures, and photo confirmation — ready for audit, insurance, and regulatory review." },
+              { icon: FlaskConical, color: "text-emerald-600", bg: "bg-emerald-50", title: "WHMIS Biohazard Trained", body: "Our couriers are WHMIS-certified to handle Category B infectious substances, specimen transport bags, and biohazard materials correctly." },
+              { icon: RefreshCw, color: "text-amber-600", bg: "bg-amber-50", title: "Flexible Availability", body: "Your patients don't follow a 9-to-5 schedule. Ask us about extended availability windows — we work around what your operation needs." },
+              { icon: Building2, color: "text-rose-600", bg: "bg-rose-50", title: "Local. Accountable.", body: "Unlike national carriers, we're Edmonton-based. One number to call. A real person who knows your name, your routes, and your clients." },
+            ].map(({ icon: Icon, color, bg, title, body }) => (
+              <div key={title} className="bg-white rounded-2xl border border-[var(--color-border)] p-6 hover:shadow-lg hover:shadow-black/5 transition-all">
+                <div className={`w-11 h-11 ${bg} rounded-xl flex items-center justify-center mb-4`}>
+                  <Icon size={20} className={color} />
+                </div>
+                <h3 className="text-base font-black text-[var(--color-text)] mb-2">{title}</h3>
+                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">{body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

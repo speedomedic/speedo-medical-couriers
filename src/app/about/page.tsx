@@ -42,8 +42,8 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 gap-4 hidden lg:grid">
               {[
                 { val: "100%", label: "Medical Focus", sub: "Nothing generic, ever" },
-                { val: "7",    label: "Days a Week",   sub: "365 days a year" },
-                { val: "8+",   label: "Cities Served", sub: "Edmonton & region" },
+                { val: "8+",   label: "Cities Covered",  sub: "Edmonton & region" },
+                { val: "STAT", label: "Rush Response",  sub: "< 60 min dispatch" },
                 { val: "24h",  label: "Account Setup", sub: "Be ready tomorrow" },
               ].map(({ val, label, sub }) => (
                 <div key={label} className="bg-white/8 border border-white/12 backdrop-blur-sm rounded-2xl p-6 text-center">
@@ -232,7 +232,7 @@ export default function AboutPage() {
             <div className="ml-auto hidden lg:flex flex-col items-end gap-1 text-right">
               <p className="text-sm font-bold text-[var(--color-text)]">Edmonton, Alberta</p>
               <p className="text-sm text-[var(--color-text-muted)]">Serving the greater Edmonton region</p>
-              <p className="text-sm text-[var(--color-text-muted)]">7 days a week · 365 days a year</p>
+              <p className="text-sm text-[var(--color-text-muted)]">Flexible scheduling — ask about availability</p>
             </div>
           </div>
         </div>

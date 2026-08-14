@@ -8,8 +8,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "order parameter required" }, { status: 400 });
   }
 
-  if (!orderNumber.startsWith("SMC-")) {
-    return NextResponse.json({ error: "Invalid order number format. Expected SMC-XXXXXXXXXX" }, { status: 400 });
+  // Accept SMC-12345 or raw numeric Shipday ID
+  if (!orderNumber.startsWith("SMC-") && isNaN(parseInt(orderNumber, 10))) {
+    return NextResponse.json({ error: "Invalid order number. Expected SMC-NNNNN format." }, { status: 400 });
   }
 
   if (!process.env.SHIPDAY_API_KEY) {

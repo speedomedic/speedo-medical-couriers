@@ -5,7 +5,7 @@ import { MapPin, Phone, ArrowRight, CheckCircle, Clock, Zap } from "lucide-react
 export const metadata: Metadata = {
   title: "Service Area | Speedo Medical Couriers",
   description:
-    "Speedo Medical Couriers serves Edmonton, St. Albert, Sherwood Park, Leduc, Spruce Grove, Fort Saskatchewan, Beaumont, and Red Deer — 7 days a week.",
+    "Speedo Medical Couriers serves Edmonton, St. Albert, Sherwood Park, Leduc, Spruce Grove, Fort Saskatchewan, Beaumont, and Red Deer — on your schedule.",
 };
 
 const cities = [
@@ -22,7 +22,7 @@ const cities = [
 const stats = [
   { value: "60+ km",   label: "Metro radius covered" },
   { value: "8",        label: "Cities served" },
-  { value: "7 days",   label: "Per week, 365/year" },
+  { value: "Ask us",   label: "About availability" },
   { value: "< 60 min", label: "STAT dispatch time" },
 ];
 
@@ -47,7 +47,7 @@ export default function ServiceAreaPage() {
           </h1>
           <p className="text-white/65 text-xl max-w-2xl mx-auto">
             Our medical courier network covers the greater Edmonton area — pharmacies, hospitals,
-            labs and clinics across 8 cities, 7 days a week.
+            labs and clinics across 8 cities, on your schedule.
           </p>
         </div>
       </section>
@@ -252,7 +252,7 @@ export default function ServiceAreaPage() {
                     { day: "Monday – Friday", hours: "7:00 AM – 9:00 PM" },
                     { day: "Saturday",        hours: "8:00 AM – 7:00 PM" },
                     { day: "Sunday",          hours: "9:00 AM – 5:00 PM" },
-                    { day: "STAT / Rush",     hours: "Available 7 days" },
+                    { day: "STAT / Rush",     hours: "Call to confirm" },
                   ].map((row) => (
                     <div key={row.day} className="flex justify-between items-center py-1.5 border-b border-white/10 last:border-0">
                       <span className="text-white/60">{row.day}</span>
@@ -292,7 +292,7 @@ export default function ServiceAreaPage() {
             Ready to Book a Delivery?
           </h2>
           <p className="text-white/60 mb-8">
-            Serving Edmonton and surrounding communities — 7 days a week.
+            Serving Edmonton and surrounding communities — on your schedule.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link

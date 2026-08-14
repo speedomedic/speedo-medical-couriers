@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { buildOrderPayload, createOrder } from "@/lib/shipday";
+import { buildOrderPayload, createOrder, formatOrderNumber } from "@/lib/shipday";
 
 export async function POST(req: NextRequest) {
   try {
@@ -20,9 +20,10 @@ export async function POST(req: NextRequest) {
 
     if (process.env.SHIPDAY_API_KEY) {
       try {
-        const { orderNumber: on, payload } = buildOrderPayload(data);
-        orderNumber = on;
+        const { payload } = buildOrderPayload(data);
         const result = await createOrder(payload);
+        // Use Shipday's numeric orderId in our order number so tracking can resolve it
+        orderNumber = formatOrderNumber(result.orderId);
         trackingLink = result.trackingLink;
         console.log("[SHIPDAY] Order created:", result.orderId, orderNumber);
       } catch (err) {

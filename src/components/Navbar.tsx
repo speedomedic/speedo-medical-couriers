@@ -8,11 +8,13 @@ import { Menu, X, Phone } from "lucide-react";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "For Business", href: "/business" },
-  { label: "Get a Quote", href: "/quote" },
-  { label: "Service Area", href: "/service-area" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Hospitals", href: "/hospitals" },
+  { label: "Partner", href: "/partner" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Track", href: "/track" },
+  { label: "Portal", href: "/portal" },
 ];
 
 export default function Navbar() {

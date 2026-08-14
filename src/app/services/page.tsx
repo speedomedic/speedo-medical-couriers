@@ -8,7 +8,7 @@ import {
 export const metadata: Metadata = {
   title: "Medical Courier Services | Speedo Medical Couriers",
   description:
-    "Edmonton's specialist medical courier — prescription delivery, specimen transport, cold-chain logistics, same-day rush, and more. Bonded, insured & background-checked. 7 days a week.",
+    "Edmonton's specialist medical courier — prescription delivery, specimen transport, cold-chain logistics, same-day rush, and more. Bonded, insured & background-checked. on your schedule.",
 };
 
 /* ── Service data ───────────────────────────────────────── */
@@ -204,7 +204,7 @@ export default function ServicesPage() {
                 <span className="text-[var(--color-brand-blue-light)]">Delivery Network</span>
               </h2>
               <p className="text-white/60 text-lg mb-8 leading-relaxed">
-                Our courier network radiates from downtown Edmonton, reaching every major hospital, pharmacy, clinic and lab within 60 km — 7 days a week.
+                Our courier network radiates from downtown Edmonton, reaching every major hospital, pharmacy, clinic and lab within 60 km — on your schedule.
               </p>
               <div className="grid grid-cols-2 gap-3 mb-8">
                 {[
@@ -225,7 +225,7 @@ export default function ServicesPage() {
               </div>
               <div className="flex flex-wrap gap-4 text-sm">
                 <div className="flex items-center gap-2 text-white/50">
-                  <Clock size={14}/> 7 days a week
+                  <Clock size={14}/> on your schedule
                 </div>
                 <div className="flex items-center gap-2 text-white/50">
                   <Truck size={14}/> 60+ km radius
@@ -361,7 +361,7 @@ export default function ServicesPage() {
               { label: "Bonded & Insured", desc: "Full commercial coverage" },
               { label: "Background Checked", desc: "All couriers vetted" },
               { label: "Chain of Custody", desc: "Documented every step" },
-              { label: "7 Days / Week", desc: "365 days a year" },
+              { label: "7 Days / Week", desc: "" },
             ].map(({ label, desc }) => (
               <div key={label}>
                 <div className="w-10 h-10 rounded-xl bg-[var(--color-brand-blue-pale)] flex items-center justify-center mx-auto mb-3">
