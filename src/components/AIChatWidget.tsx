@@ -8,13 +8,13 @@ type Message = { role: "user" | "assistant"; content: string };
 const WELCOME: Message = {
   role: "assistant",
   content:
-    "Hi! I'm Speedo's AI assistant 👋 I can answer questions about our medical courier services, coverage areas, and help you get a quote or book a pickup. What can I help you with?",
+    "Hi! I'm Speedo's AI assistant. I can give you a real cost estimate, explain how our routes work, or help you get set up as a partner. What brings you here today?",
 };
 
 const QUICK_REPLIES = [
-  "What areas do you cover?",
-  "I'm a pharmacy — how do I partner?",
-  "How does prescription delivery work?",
+  "What's my monthly cost as a pharmacy?",
+  "How fast is a STAT delivery?",
+  "Do you handle cold-chain / specimens?",
 ];
 
 export default function AIChatWidget() {
