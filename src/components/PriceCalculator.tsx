@@ -14,10 +14,9 @@ const BUSINESS_TYPES = [
 ];
 
 const ZONES = [
-  { id: "core", label: "Edmonton Core", sub: "Downtown, Oliver, Garneau, Glenora", base: 18 },
-  { id: "inner", label: "Inner Edmonton", sub: "Mill Woods, Castle Downs, West Jasper", base: 22 },
+  { id: "edmonton", label: "Edmonton", sub: "Anywhere within Edmonton city limits", base: 20 },
   { id: "suburbs", label: "St. Albert / Sherwood Park", sub: "All communities", base: 28 },
-  { id: "outer", label: "Leduc / Spruce Grove / Fort Sask", sub: "Outer region", base: 35 },
+  { id: "outer", label: "Leduc / Beaumont / Spruce Grove / Fort Sask", sub: "Outer region", base: 35 },
 ];
 
 const ADDONS = [
@@ -59,7 +58,7 @@ function Counter({ value, onChange, min = 1, max = 100 }: { value: number; onCha
 export default function PriceCalculator() {
   const [bizType, setBizType] = useState("pharmacy");
   const [deliveriesPerWeek, setDeliveriesPerWeek] = useState(5);
-  const [zone, setZone] = useState("core");
+  const [zone, setZone] = useState("edmonton");
   const [addons, setAddons] = useState<string[]>([]);
   const [afterHours, setAfterHours] = useState(false);
   const [stat, setStat] = useState(false);
@@ -321,7 +320,7 @@ export default function PriceCalculator() {
 
           <div className="space-y-2 mt-auto">
             <p className="text-xs text-[var(--color-text-muted)] text-center leading-relaxed">
-              This is an estimate. Your exact route rate is based on volume, stops, and schedule — we build a custom rate card for every account.
+              Shows on-demand rates. Contracted pharmacy &amp; LTC routes start from $9/delivery — lower than what the calculator shows.
             </p>
             <Link
               href="/partner"

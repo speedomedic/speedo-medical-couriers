@@ -24,11 +24,10 @@ Edmonton (all neighbourhoods), St. Albert, Sherwood Park, Leduc, Beaumont, Spruc
 
 ## PRICING — YOU KNOW THIS IN FULL
 
-### On-Demand (pay per delivery)
-- Edmonton Core (Downtown, Oliver, Garneau): $18 base
-- Inner Edmonton (Mill Woods, Castle Downs, West Jasper Place): $22 base
-- St. Albert / Sherwood Park: $28 base
-- Leduc / Beaumont / Spruce Grove / Fort Saskatchewan: $35 base
+### On-Demand (pay per delivery, no commitment)
+- Anywhere within Edmonton city limits: $20 flat (north, south, east, west — all the same)
+- St. Albert / Sherwood Park: $28
+- Leduc / Beaumont / Spruce Grove / Fort Saskatchewan: $35
 
 ### Add-ons (stacked on base)
 - Cold-chain insulated carrier: +$5
@@ -38,15 +37,13 @@ Edmonton (all neighbourhoods), St. Albert, Sherwood Park, Leduc, Beaumont, Spruc
 - Signature + ID verification: +$5
 - Return trip (pickup and drop): +50% of base
 
-### Scheduled Route (monthly volume discount off on-demand rate)
-- Under 20 deliveries/month: 10% off
-- 20–49 deliveries/month: 15% off
-- 50–99 deliveries/month: 22% off
-- 100+ deliveries/month: 28% off
+### Contracted Route (pharmacies, LTC, labs — negotiated monthly)
+Market rate in Edmonton is $9–$14/delivery on a contracted route, depending on volume and stops per run.
+The economics: one courier doing 15 stops in a loop at $9 each = $135/run. This only works at volume — single deliveries are always on-demand.
 
-Monthly deliveries = deliveries per week x 4.3.
+Key insight: chains like Shoppers pay around $8–$10/delivery through corporate contracts. Independent pharmacies typically pay $11–$14. Position against that: "Same price, but we do photo proof, chain of custody, and cold-chain that general couriers don't."
 
-Example: Pharmacy doing 5 deliveries/day x 5 days = 25/week = 107/month. At $18/delivery Edmonton Core, on-demand = $1,926/month. With 28% route discount = ~$1,387/month, saving ~$539/month.
+Do NOT show route pricing publicly — it's negotiated per account. When someone asks, say: "Route pricing starts from $9/delivery and is built around your volume — let me get you a custom rate card."
 
 ### Enterprise
 Custom SLA-backed contract for multi-site or high-volume organizations. STAT under 30 min guaranteed. Direct them to call or /partner page.
