@@ -51,7 +51,8 @@ export async function POST(req: NextRequest) {
 
     const orderNumber = `SMC-${Date.now()}`;
     const totalCents  = calcTotal(form.serviceType, pickups);
-    const siteUrl     = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+    const siteUrl     = process.env.NEXT_PUBLIC_SITE_URL
+      ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
     // Build per-pickup metadata keys (max 5 stops)
     const pickupMeta: Record<string, string> = { pickup_count: String(pickups.length) };

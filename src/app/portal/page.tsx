@@ -77,10 +77,10 @@ export default function PortalPage() {
             </div>
             <div className="flex gap-3">
               <Link
-                href="/book"
+                href="/portal/pharmacy"
                 className="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-amber-900 font-bold px-5 py-2.5 rounded-xl text-sm transition-all"
               >
-                New Delivery <ArrowRight size={13} />
+                Pharmacy Portal <ArrowRight size={13} />
               </Link>
               <a
                 href="tel:7808070000"
@@ -198,7 +198,7 @@ export default function PortalPage() {
         {!hasSearched && (
           <div className="grid sm:grid-cols-3 gap-5 mt-4">
             {[
-              { icon: Package, title: "Book a Delivery", desc: "Place a same-day or scheduled order for your business.", href: "/book", label: "Book Now" },
+              { icon: Package, title: "Pharmacy Portal", desc: "Submit prescription deliveries directly to Speedo dispatch — no hold times.", href: "/portal/pharmacy", label: "Open Portal" },
               { icon: Building2, title: "Become a Partner", desc: "Register your business for volume pricing and dedicated routes.", href: "/partner", label: "Register" },
               { icon: Phone, title: "Call Dispatch", desc: "Need an urgent STAT pickup? Call our team directly.", href: "tel:7808070000", label: "(780) 807-0000" },
             ].map(({ icon: Icon, title, desc, href, label }) => (
