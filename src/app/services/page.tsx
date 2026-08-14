@@ -28,8 +28,8 @@ const services = [
     label: "Specimen Transport",
     tagline: "Lab samples handled with precision.",
     gradient: "from-indigo-600 to-sky-400",
-    desc: "Time-sensitive biological specimens require specialist handling. Our WHMIS-certified couriers transport cultures, blood samples, biopsies, and pathology with proper containment and temperature protocols.",
-    pills: ["WHMIS Certified", "Biohazard Handling", "Temperature Control", "Chain of Custody", "Lab-to-Lab Capable"],
+    desc: "Time-sensitive biological specimens require specialist handling. Our trained couriers transport cultures, blood samples, biopsies, and pathology with proper containment and temperature protocols.",
+    pills: ["Specialist Trained", "Biohazard Handling", "Temperature Control", "Chain of Custody", "Lab-to-Lab Capable"],
   },
   {
     id: "cold",
@@ -106,7 +106,7 @@ export default function ServicesPage() {
             Every service is designed around the demands of healthcare — compliance, chain-of-custody, temperature integrity, and genuine urgency. Nothing generic. Ever.
           </p>
           <div className="flex flex-wrap justify-center gap-3 mt-8">
-            {["Privacy Protected", "WHMIS Certified", "Bonded & Insured", "7 Days a Week"].map(t => (
+            {["Privacy Protected", "Specialist Trained", "Bonded & Insured", "7 Days a Week"].map(t => (
               <span key={t} className="inline-flex items-center gap-1.5 bg-white/10 border border-white/15 text-white/75 text-xs font-medium px-4 py-2 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0" />
                 {t}
@@ -357,7 +357,7 @@ export default function ServicesPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
             {[
               { label: "Privacy Protected", desc: "Patient privacy on every run" },
-              { label: "WHMIS Certified", desc: "Biohazard trained couriers" },
+              { label: "Specialist Trained", desc: "Biohazard trained couriers" },
               { label: "Bonded & Insured", desc: "Full commercial coverage" },
               { label: "Background Checked", desc: "All couriers vetted" },
               { label: "Chain of Custody", desc: "Documented every step" },

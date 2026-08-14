@@ -75,7 +75,7 @@ const industries = [
   {
     icon: FlaskConical,
     name: "Medical Labs & Diagnostics",
-    desc: "Time-critical specimen transport from clinic collection to your lab. WHMIS compliant. Tracked, documented.",
+    desc: "Time-critical specimen transport from clinic collection to your lab. properly handled. Tracked, documented.",
     stats: "Turn-around in under 2 hours",
   },
   {

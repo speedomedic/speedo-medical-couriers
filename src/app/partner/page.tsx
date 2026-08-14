@@ -163,7 +163,7 @@ export default function PartnerPage() {
                   "Volume pricing — the more you ship, the less you pay",
                   "Single point of contact who knows your operation",
                   "Monthly consolidated invoicing",
-                  "WHMIS-trained couriers for specimens & biologics",
+                  "Trained couriers for specimens & biologics",
                   "Live tracking and delivery confirmation",
                   "Flexible scheduling — ask about your coverage needs",
                 ].map((item) => (

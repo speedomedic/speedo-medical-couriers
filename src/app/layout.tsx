@@ -24,12 +24,60 @@ export const metadata: Metadata = {
   },
 };
 
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://speedomedic.ca",
+  "name": "Speedo Medical Couriers",
+  "description": "Edmonton's dedicated medical courier service specializing in prescription delivery, lab specimen transport, and healthcare logistics across Edmonton and surrounding communities.",
+  "url": "https://speedomedic.ca",
+  "telephone": "+17808070000",
+  "email": "speedomedical@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Edmonton",
+    "addressRegion": "AB",
+    "addressCountry": "CA",
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 53.5461,
+    "longitude": -113.4938,
+  },
+  "areaServed": [
+    { "@type": "City", "name": "Edmonton" },
+    { "@type": "City", "name": "St. Albert" },
+    { "@type": "City", "name": "Sherwood Park" },
+    { "@type": "City", "name": "Leduc" },
+    { "@type": "City", "name": "Spruce Grove" },
+    { "@type": "City", "name": "Fort Saskatchewan" },
+    { "@type": "City", "name": "Beaumont" },
+  ],
+  "serviceType": [
+    "Medical Courier",
+    "Prescription Delivery",
+    "Lab Specimen Transport",
+    "Cold Chain Delivery",
+    "STAT Medical Delivery",
+  ],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "description": "Contact us for current scheduling and availability",
+  },
+  "sameAs": [],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
         <Navbar />
         <main>{children}</main>
         <Footer />

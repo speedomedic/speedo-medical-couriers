@@ -33,8 +33,43 @@ export default async function BlogPostPage({ params }: Props) {
   const allPosts = await getAllPosts();
   const related = allPosts.filter((p) => p.slug !== slug).slice(0, 3);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://speedomedic.ca";
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": post.excerpt,
+    "image": post.image,
+    "datePublished": post.date,
+    "dateModified": post.date,
+    "url": `${siteUrl}/blog/${post.slug}`,
+    "author": {
+      "@type": "Organization",
+      "name": "Speedo Medical Couriers",
+      "url": siteUrl,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Speedo Medical Couriers",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteUrl}/images/logo-horizontal-transparent.png`,
+      },
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/blog/${post.slug}`,
+    },
+    "articleSection": post.category,
+    "keywords": (post as Record<string, unknown>).focusKeyword as string | undefined,
+  };
+
   return (
     <main className="pt-28 pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       {/* Header */}
       <section className="bg-[var(--color-brand-navy)] py-16 relative overflow-hidden">
         <div className="absolute inset-0 hero-grid" />

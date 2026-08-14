@@ -133,7 +133,7 @@ export default function AboutPage() {
               <div className="mt-8 space-y-3">
                 {[
                   "Medical delivery is our only business — not a side service",
-                  "Every courier is background-checked and WHMIS-trained",
+                  "Every courier is background-checked and specialist-trained",
                   "We answer the phone — not a voicemail, not a chatbot",
                 ].map(item => (
                   <div key={item} className="flex items-start gap-3">

@@ -40,7 +40,7 @@ interface FormState {
 
 const SERVICE_OPTIONS: { id: ServiceType; label: string; icon: React.ReactNode; desc: string }[] = [
   { id: "prescription", label: "Prescription Delivery",  icon: <Truck size={24} />,         desc: "Medications from pharmacy to patient or facility" },
-  { id: "specimen",     label: "Specimen Transport",     icon: <FlaskConical size={24} />,   desc: "Lab specimens with WHMIS-compliant chain of custody" },
+  { id: "specimen",     label: "Specimen Transport",     icon: <FlaskConical size={24} />,   desc: "Lab specimens with documented chain of custody" },
   { id: "equipment",   label: "Medical Equipment",       icon: <Package size={24} />,        desc: "Devices, supplies, and healthcare equipment" },
   { id: "rush",        label: "Same-Day Rush / STAT",    icon: <Zap size={24} />,            desc: "Urgent dispatch — driver sent within 60 min" },
   { id: "documents",  label: "Medical Documents",        icon: <FileText size={24} />,       desc: "Fully confidential document transport" },

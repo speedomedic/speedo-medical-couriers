@@ -4,7 +4,7 @@ import {
   ArrowRight, CheckCircle, Clock, MapPin, Phone,
   Package, Thermometer, FileText, FlaskConical, Truck,
   AlertCircle, ChevronRight, Heart, RefreshCw, Building2,
-  Hospital, Stethoscope, HeartHandshake, Activity, X,
+  Stethoscope, HeartHandshake, Activity, X,
 } from "lucide-react";
 
 import VideoHero from "@/components/VideoHero";
@@ -41,7 +41,7 @@ const services = [
     icon: FlaskConical,
     title: "Specimen Transport",
     price: "$55",
-    desc: "Time-sensitive biological samples handled WHMIS-compliant from clinic to lab.",
+    desc: "Time-sensitive biological samples with documented chain of custody from clinic to lab.",
     href: "/services#specimens",
     gradient: "from-indigo-600 to-sky-400",
     img: "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=600&q=80",
@@ -217,26 +217,25 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Hospitals & AHS */}
-            <div className="group relative rounded-3xl overflow-hidden border border-[var(--color-border)] hover:border-[var(--color-brand-red)] hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300">
-              <div className="h-40 relative overflow-hidden bg-gradient-to-br from-red-600 to-rose-400">
-                <Image src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=700&q=80" alt="Hospital" fill sizes="(max-width: 1024px) 50vw, 33vw" className="object-cover mix-blend-overlay opacity-50 group-hover:scale-105 transition-transform duration-500" />
+            {/* Home Health & Rehabilitation */}
+            <div className="group relative rounded-3xl overflow-hidden border border-[var(--color-border)] hover:border-violet-500 hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-300">
+              <div className="h-40 relative overflow-hidden bg-gradient-to-br from-violet-600 to-purple-400">
+                <Image src="https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe?auto=format&fit=crop&w=700&q=80" alt="Home health" fill sizes="(max-width: 1024px) 50vw, 33vw" className="object-cover mix-blend-overlay opacity-50 group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 flex items-end p-5">
                   <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                    <Hospital size={20} className="text-white" />
+                    <Activity size={20} className="text-white" />
                   </div>
                 </div>
-                <div className="absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wide">AHS Partner</div>
               </div>
               <div className="p-6">
-                <h3 className="text-lg font-black text-[var(--color-text)] mb-2">Hospitals &amp; AHS Facilities</h3>
-                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">Cross-facility transport between AHS sites, inter-departmental deliveries, and time-critical patient medication.</p>
+                <h3 className="text-lg font-black text-[var(--color-text)] mb-2">Home Health &amp; Rehab Agencies</h3>
+                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">IV supplies, wound care kits, and infusion medications delivered to homecare clients across Edmonton — reliably and on time.</p>
                 <ul className="space-y-1.5 mb-5">
-                  {["Cross-facility AHS transfers", "Surgical supply & equipment delivery", "Patient medication between sites", "Urgent STAT response < 60 min"].map(i => (
-                    <li key={i} className="flex items-center gap-2 text-xs text-[var(--color-text)]"><CheckCircle size={11} className="text-[var(--color-brand-red)] flex-shrink-0" /> {i}</li>
+                  {["IV & infusion supply delivery", "Wound care & dressing kits", "Rehabilitation equipment", "Scheduled client routes"].map(i => (
+                    <li key={i} className="flex items-center gap-2 text-xs text-[var(--color-text)]"><CheckCircle size={11} className="text-violet-600 flex-shrink-0" /> {i}</li>
                   ))}
                 </ul>
-                <Link href="/contact" className="inline-flex items-center gap-1.5 text-sm font-bold text-[var(--color-brand-red)] hover:gap-2.5 transition-all">Discuss a hospital contract <ArrowRight size={13} /></Link>
+                <Link href="/partner" className="inline-flex items-center gap-1.5 text-sm font-bold text-violet-600 hover:gap-2.5 transition-all">Set up an agency account <ArrowRight size={13} /></Link>
               </div>
             </div>
 
@@ -252,7 +251,7 @@ export default function HomePage() {
               </div>
               <div className="p-6">
                 <h3 className="text-lg font-black text-[var(--color-text)] mb-2">Diagnostic Labs</h3>
-                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">WHMIS-trained couriers moving biohazardous specimens from collection sites to DynaLIFE and partner labs.</p>
+                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">Trained couriers moving biohazardous specimens from collection sites to DynaLIFE and partner labs.</p>
                 <ul className="space-y-1.5 mb-5">
                   {["Clinic-to-lab specimen transport", "Biohazard-compliant handling", "STAT same-day priority pickup", "Chain of custody documented"].map(i => (
                     <li key={i} className="flex items-center gap-2 text-xs text-[var(--color-text)]"><CheckCircle size={11} className="text-[var(--color-brand-blue)] flex-shrink-0" /> {i}</li>
@@ -451,7 +450,7 @@ export default function HomePage() {
               </h2>
             </div>
             <p className="text-lg text-[var(--color-text-muted)] max-w-md lg:text-right lg:pb-1">
-              General couriers handle boxes. We handle chain-of-custody, cold-chain, WHMIS compliance, biohazard protocols, and STAT response — purpose-built for healthcare.
+              General couriers handle boxes. We handle chain-of-custody, cold-chain, proper biohazard protocols, and STAT response — purpose-built for healthcare.
             </p>
           </div>
 
@@ -463,7 +462,7 @@ export default function HomePage() {
               <div className="p-5 text-center text-[var(--color-brand-blue)] border-b border-l border-[var(--color-border)]">Speedo Medical</div>
             </div>
             {[
-              ["WHMIS biohazard training", false, true],
+              ["Biohazard handling training", false, true],
               ["Cold-chain & temperature monitoring", false, true],
               ["Chain-of-custody documentation", false, true],
               ["STAT dispatch (< 60 min)", false, true],
@@ -488,7 +487,7 @@ export default function HomePage() {
               { icon: Activity, color: "text-[var(--color-brand-blue)]", bg: "bg-blue-50", title: "STAT Response < 60 Min", body: "When a lab result changes a diagnosis, minutes matter. Our STAT service guarantees dispatch within minutes and delivery in under an hour within Edmonton." },
               { icon: Thermometer, color: "text-sky-600", bg: "bg-sky-50", title: "Cold-Chain Integrity", body: "Vaccines, biologics, and insulin require precise temperature control. We use medical-grade insulated carriers with temperature logs every step of the way." },
               { icon: FileText, color: "text-indigo-600", bg: "bg-indigo-50", title: "Chain of Custody", body: "Every pickup and delivery is documented with timestamps, signatures, and photo confirmation — ready for audit, insurance, and regulatory review." },
-              { icon: FlaskConical, color: "text-emerald-600", bg: "bg-emerald-50", title: "WHMIS Biohazard Trained", body: "Our couriers are WHMIS-certified to handle Category B infectious substances, specimen transport bags, and biohazard materials correctly." },
+              { icon: FlaskConical, color: "text-emerald-600", bg: "bg-emerald-50", title: "Biohazard Handling Trained", body: "Our couriers are trained to handle specimen transport bags and biohazard materials with proper containment protocols." },
               { icon: RefreshCw, color: "text-amber-600", bg: "bg-amber-50", title: "Flexible Availability", body: "Your patients don't follow a 9-to-5 schedule. Ask us about extended availability windows — we work around what your operation needs." },
               { icon: Building2, color: "text-rose-600", bg: "bg-rose-50", title: "Local. Accountable.", body: "Unlike national carriers, we're Edmonton-based. One number to call. A real person who knows your name, your routes, and your clients." },
             ].map(({ icon: Icon, color, bg, title, body }) => (

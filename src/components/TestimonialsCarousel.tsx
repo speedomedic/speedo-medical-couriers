@@ -16,7 +16,7 @@ const testimonials = [
   },
   {
     name: "Jason K.", role: "Lab Manager", company: "Edmonton Diagnostic Labs",
-    quote: "Specimen integrity is everything in our field. Speedo's WHMIS compliance and cold-chain handling gives us complete confidence on every run.",
+    quote: "Specimen integrity is everything in our field. Speedo's specialist handling and cold-chain protocols gives us complete confidence on every run.",
     stars: 5, color: "from-teal-500 to-emerald-600",
   },
   {

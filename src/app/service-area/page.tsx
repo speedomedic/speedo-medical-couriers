@@ -129,7 +129,7 @@ export default function ServiceAreaPage() {
                 {
                   step: "02",
                   title: "We Dispatch a Courier",
-                  desc: "A background-checked, WHMIS-trained courier in your city is dispatched immediately — typically arriving within 60–90 minutes.",
+                  desc: "A background-checked, trained courier in your city is dispatched immediately — typically arriving within 60–90 minutes.",
                   icon: "🚐",
                   color: "bg-[var(--color-brand-blue-dark)]",
                 },
