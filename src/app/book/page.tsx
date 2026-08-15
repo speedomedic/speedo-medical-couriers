@@ -32,6 +32,7 @@ interface FormState {
   dropoffAddress:     string;
   dropoffCity:        string;
   dropoffPhone:       string;
+  distanceKm:         number;
   contactName:        string;
   contactEmail:       string;
   contactPhone:       string;
@@ -72,23 +73,24 @@ const INITIAL: FormState = {
   serviceType: "",
   pickups: [{ ...BLANK_PICKUP }],
   dropoffName: "", dropoffOrg: "", dropoffAddress: "", dropoffCity: "", dropoffPhone: "",
+  distanceKm: 5,
   contactName: "", contactEmail: "", contactPhone: "", specialInstructions: "",
 };
 
 /* ── Pricing ─────────────────────────────────────────────── */
 
-const EXTRA_STOP_FEE = 25;
+const BASE_RATE   = 16;    // $16 flat
+const PER_KM      = 0.90;  // $0.90/km
+const STAT_FEE    = 25;    // $25 STAT surcharge
+const EXTRA_STOP  = 10;    // $10/extra stop
 
-function basePrice(serviceType: string, pickupTime: string): number {
-  if (serviceType === "rush" || pickupTime === "asap") return 85;
-  if (serviceType === "specimen") return 55;
-  return 35;
-}
-
-function calcTotal(serviceType: string, pickups: PickupStop[]): number {
-  const base  = basePrice(serviceType, pickups[0]?.time ?? "");
-  const extra = Math.max(0, pickups.length - 1) * EXTRA_STOP_FEE;
-  return base + extra;
+function calcTotal(serviceType: string, pickups: PickupStop[], distanceKm: number): number {
+  const km     = Math.max(1, Math.round(distanceKm || 5));
+  const base   = BASE_RATE + PER_KM * km;
+  const isStat = serviceType === "rush" || (pickups[0]?.time ?? "") === "asap";
+  const stat   = isStat ? STAT_FEE : 0;
+  const extra  = Math.max(0, pickups.length - 1) * EXTRA_STOP;
+  return base + stat + extra;
 }
 
 function fmtCAD(amount: number): string {
@@ -160,7 +162,7 @@ export default function BookPage() {
     return true;
   };
 
-  const total = calcTotal(form.serviceType, form.pickups);
+  const total = calcTotal(form.serviceType, form.pickups, form.distanceKm);
 
   /* submit → Stripe checkout */
   const handleSubmit = async (e: React.FormEvent) => {
@@ -276,7 +278,7 @@ export default function BookPage() {
                 <div>
                   <h2 className="text-xl font-bold text-[var(--color-brand-navy)] mb-1">Pickup Details</h2>
                   <p className="text-sm text-[var(--color-text-muted)] mb-6">
-                    Add one or more pickup stops. Each additional stop is +{fmtCAD(EXTRA_STOP_FEE)}.
+                    Add one or more pickup stops. Each additional stop is +{fmtCAD(EXTRA_STOP)}.
                   </p>
 
                   <div className="space-y-5">
@@ -296,7 +298,7 @@ export default function BookPage() {
                             </h3>
                             {idx > 0 && (
                               <span className="text-xs font-semibold text-[var(--color-brand-blue)] bg-[var(--color-brand-blue-pale)] px-2 py-0.5 rounded-full">
-                                +{fmtCAD(EXTRA_STOP_FEE)}
+                                +{fmtCAD(EXTRA_STOP)}
                               </span>
                             )}
                           </div>
@@ -410,7 +412,7 @@ export default function BookPage() {
                       className="mt-4 w-full flex items-center justify-center gap-2 border-2 border-dashed border-[var(--color-border)] hover:border-[var(--color-brand-blue)] text-[var(--color-text-muted)] hover:text-[var(--color-brand-blue)] rounded-2xl py-3 text-sm font-medium transition-all"
                     >
                       <Plus size={15} />
-                      Add Another Pickup Stop <span className="text-xs opacity-70">(+{fmtCAD(EXTRA_STOP_FEE)})</span>
+                      Add Another Pickup Stop <span className="text-xs opacity-70">(+{fmtCAD(EXTRA_STOP)})</span>
                     </button>
                   )}
                 </div>
@@ -455,6 +457,40 @@ export default function BookPage() {
                       <div>
                         <FieldLabel>Recipient Phone</FieldLabel>
                         <Input type="tel" value={form.dropoffPhone} onChange={(e) => set("dropoffPhone", e.target.value)} placeholder="(780) 555-0001" />
+                      </div>
+                    </div>
+
+                    {/* Distance slider */}
+                    <div className="bg-[var(--color-brand-blue-pale)] rounded-2xl p-5 border border-blue-200">
+                      <FieldLabel>Approximate distance (km)</FieldLabel>
+                      <div className="flex items-center gap-4 mt-1">
+                        <input
+                          type="range"
+                          min={1}
+                          max={80}
+                          value={form.distanceKm}
+                          onChange={(e) => set("distanceKm", e.target.value)}
+                          className="flex-1 accent-[#1B6FEB] cursor-pointer"
+                        />
+                        <div className="flex items-center gap-1 w-20 shrink-0">
+                          <input
+                            type="number"
+                            min={1}
+                            max={200}
+                            value={form.distanceKm}
+                            onChange={(e) => set("distanceKm", e.target.value)}
+                            className="w-14 px-2 py-1.5 rounded-lg border border-[var(--color-border)] text-sm text-center font-bold focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-blue)] bg-white"
+                          />
+                          <span className="text-xs text-[var(--color-text-muted)]">km</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between mt-3">
+                        <p className="text-xs text-[var(--color-text-muted)]">
+                          Pickup → delivery distance · $16 base + $0.90/km
+                        </p>
+                        <p className="text-sm font-black text-[var(--color-brand-blue)]">
+                          {fmtCAD(BASE_RATE + PER_KM * Math.max(1, Math.round(form.distanceKm)))}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -528,12 +564,22 @@ export default function BookPage() {
                       <div className="pt-3 border-t border-blue-200 space-y-1.5">
                         <div className="flex justify-between text-xs">
                           <span className="text-[var(--color-text-muted)]">Base rate</span>
-                          <span className="text-[var(--color-brand-navy)]">{fmtCAD(basePrice(form.serviceType, form.pickups[0]?.time ?? ""))}</span>
+                          <span className="text-[var(--color-brand-navy)]">{fmtCAD(BASE_RATE)}</span>
                         </div>
+                        <div className="flex justify-between text-xs">
+                          <span className="text-[var(--color-text-muted)]">{Math.max(1, Math.round(form.distanceKm))} km × $0.90</span>
+                          <span className="text-[var(--color-brand-navy)]">{fmtCAD(PER_KM * Math.max(1, Math.round(form.distanceKm)))}</span>
+                        </div>
+                        {(form.serviceType === "rush" || form.pickups[0]?.time === "asap") && (
+                          <div className="flex justify-between text-xs">
+                            <span className="text-[var(--color-text-muted)]">STAT rush surcharge</span>
+                            <span className="text-[var(--color-brand-navy)]">+{fmtCAD(STAT_FEE)}</span>
+                          </div>
+                        )}
                         {form.pickups.length > 1 && (
                           <div className="flex justify-between text-xs">
-                            <span className="text-[var(--color-text-muted)]">{form.pickups.length - 1} additional stop{form.pickups.length > 2 ? "s" : ""}</span>
-                            <span className="text-[var(--color-brand-navy)]">+{fmtCAD((form.pickups.length - 1) * EXTRA_STOP_FEE)}</span>
+                            <span className="text-[var(--color-text-muted)]">{form.pickups.length - 1} extra stop{form.pickups.length > 2 ? "s" : ""}</span>
+                            <span className="text-[var(--color-brand-navy)]">+{fmtCAD((form.pickups.length - 1) * EXTRA_STOP)}</span>
                           </div>
                         )}
                         <div className="flex justify-between items-center pt-1 border-t border-blue-200">
@@ -593,7 +639,7 @@ export default function BookPage() {
                   ) : (
                     <>
                       <CreditCard size={15} />
-                      Pay {fmtCAD(total)} & Confirm
+                      Pay {fmtCAD(total)} — Confirm Booking
                     </>
                   )}
                 </button>

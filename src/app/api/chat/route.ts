@@ -25,17 +25,23 @@ Edmonton (all neighbourhoods), St. Albert, Sherwood Park, Leduc, Beaumont, Spruc
 ## PRICING — YOU KNOW THIS IN FULL
 
 ### On-Demand (pay per delivery, no commitment)
-- Anywhere within Edmonton city limits: $20 flat (north, south, east, west — all the same)
-- St. Albert / Sherwood Park: $28
-- Leduc / Beaumont / Spruce Grove / Fort Saskatchewan: $35
+Formula: **$16 base + $0.90 per kilometre** from pickup to dropoff.
 
-### Add-ons (stacked on base)
+Example prices:
+- 5 km (local / downtown): $20.50
+- 10 km (cross-city Edmonton): $25.00
+- 20 km (Edmonton to south suburbs): $34.00
+- 30 km (to St. Albert, Sherwood Park, Leduc): $43.00
+- 45 km (to Spruce Grove, Fort Sask, Beaumont): $56.50
+
+### Add-ons (stacked on top of base + km rate)
+- STAT rush (guaranteed pickup under 60 min): +$25
 - Cold-chain insulated carrier: +$5
 - Biohazard specimen transport kit: +$8
 - After-hours delivery (8 pm – 7 am): +$15
-- STAT rush (guaranteed pickup under 60 min): +$25
 - Signature + ID verification: +$5
-- Return trip (pickup and drop): +50% of base
+- Return trip (pickup and drop): +50% of total
+- Extra pickup stop: +$10/stop
 
 ### Contracted Route (pharmacies, LTC, labs — negotiated monthly)
 Market rate in Edmonton is $9–$14/delivery on a contracted route, depending on volume and stops per run.

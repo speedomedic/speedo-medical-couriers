@@ -3,26 +3,28 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2026-07-29.dahlia" });
 
-const EXTRA_STOP_FEE = 25_00; // cents
+const BASE_RATE_CENTS  = 16_00;  // $16.00
+const PER_KM_CENTS     = 90;     // $0.90/km
+const STAT_SURCHARGE   = 25_00;  // $25.00
+const EXTRA_STOP_FEE   = 10_00;  // $10.00 per additional stop
 
-function baseAmountCents(serviceType: string, pickupTime: string): number {
-  if (serviceType === "rush" || pickupTime === "asap") return 85_00;
-  if (serviceType === "specimen") return 55_00;
-  return 35_00;
+function calcTotal(serviceType: string, pickups: { time?: string }[], distanceKm: number): number {
+  const km     = Math.max(1, Math.round(distanceKm || 5));
+  const base   = BASE_RATE_CENTS + (PER_KM_CENTS * km);
+  const isStat = serviceType === "rush" || (pickups[0]?.time ?? "") === "asap";
+  const stat   = isStat ? STAT_SURCHARGE : 0;
+  const extra  = Math.max(0, pickups.length - 1) * EXTRA_STOP_FEE;
+  return base + stat + extra;
 }
 
-function calcTotal(serviceType: string, pickups: { time?: string }[]): number {
-  const base  = baseAmountCents(serviceType, pickups[0]?.time ?? "");
-  const extra = Math.max(0, pickups.length - 1) * EXTRA_STOP_FEE;
-  return base + extra;
-}
-
-function serviceLabel(serviceType: string, pickupTime: string, numStops: number): string {
-  const type =
-    serviceType === "rush" || pickupTime === "asap" ? "STAT Rush Delivery (under 60 min)"
-    : serviceType === "specimen" ? "Priority Specimen Transport (within 90 min)"
-    : "Standard Same-Day Delivery (2–4 hrs)";
-  return numStops > 1 ? `${type} — ${numStops} pickup stops` : type;
+function serviceLabel(serviceType: string, pickupTime: string, numStops: number, distanceKm: number): string {
+  const urgency =
+    serviceType === "rush" || pickupTime === "asap" ? "STAT Rush (under 60 min)"
+    : serviceType === "specimen" ? "Specimen Transport (within 90 min)"
+    : "Same-Day Delivery (2–4 hrs)";
+  const km = Math.max(1, Math.round(distanceKm || 5));
+  const stops = numStops > 1 ? ` — ${numStops} pickup stops` : "";
+  return `${urgency}${stops} · ${km} km`;
 }
 
 export async function POST(req: NextRequest) {
@@ -50,7 +52,7 @@ export async function POST(req: NextRequest) {
         }];
 
     const orderNumber = `SMC-${Date.now()}`;
-    const totalCents  = calcTotal(form.serviceType, pickups);
+    const totalCents  = calcTotal(form.serviceType, pickups, Number(form.distanceKm) || 5);
     const siteUrl     = process.env.NEXT_PUBLIC_SITE_URL
       ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
@@ -74,7 +76,7 @@ export async function POST(req: NextRequest) {
           price_data: {
             currency:     "cad",
             product_data: {
-              name:        serviceLabel(form.serviceType, pickups[0]?.time ?? "", pickups.length),
+              name:        serviceLabel(form.serviceType, pickups[0]?.time ?? "", pickups.length, Number(form.distanceKm) || 5),
               description: `Speedo Medical Couriers — ${pickups.length} pickup${pickups.length > 1 ? "s" : ""} → ${form.dropoffCity ?? ""}`,
             },
             unit_amount: totalCents,

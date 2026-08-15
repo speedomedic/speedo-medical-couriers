@@ -4,7 +4,7 @@ import PriceCalculator from "@/components/PriceCalculator";
 
 export const metadata = {
   title: "Pricing | Speedo Medical Couriers",
-  description: "Medical courier pricing in Edmonton. Contracted pharmacy routes from $9/delivery. On-demand same-day delivery from $20. No fuel surcharges, no hidden fees.",
+  description: "Medical courier pricing in Edmonton. On-demand: $16 base + $0.90/km. Contracted pharmacy routes from $9/delivery. No fuel surcharges, no hidden fees.",
 };
 
 const TIERS = [
@@ -37,8 +37,8 @@ const TIERS = [
     name: "On-Demand",
     tagline: "One-off runs, no commitment",
     badge: null,
-    price: "From $20",
-    priceSub: "per delivery within Edmonton",
+    price: "$16 + $0.90/km",
+    priceSub: "base rate + per kilometre",
     color: "border-[var(--color-border)]",
     highlight: false,
     note: null,
@@ -82,11 +82,11 @@ const TIERS = [
 ];
 
 const ON_DEMAND_ZONES = [
-  { zone: "Edmonton", desc: "Anywhere within Edmonton city limits", time: "1–3 hr", from: "$20" },
-  { zone: "St. Albert / Sherwood Park", desc: "All communities", time: "2–3 hr", from: "$28" },
-  { zone: "Leduc / Beaumont / Devon", desc: "South of Edmonton", time: "2–4 hr", from: "$35" },
-  { zone: "Spruce Grove / Stony Plain", desc: "West of Edmonton", time: "2–4 hr", from: "$35" },
-  { zone: "Fort Saskatchewan / Gibbons", desc: "Northeast of Edmonton", time: "2–4 hr", from: "$35" },
+  { zone: "5 km",  desc: "Downtown / local neighbourhood",          time: "1–2 hr", from: "$20.50" },
+  { zone: "10 km", desc: "Cross-city Edmonton",                     time: "1–2 hr", from: "$25.00" },
+  { zone: "20 km", desc: "South / north Edmonton to suburbs",       time: "1–3 hr", from: "$34.00" },
+  { zone: "30 km", desc: "St. Albert · Sherwood Park · Leduc",      time: "2–3 hr", from: "$43.00" },
+  { zone: "45 km", desc: "Spruce Grove · Fort Sask · Beaumont",     time: "2–4 hr", from: "$56.50" },
 ];
 
 const ADDONS = [
@@ -113,8 +113,8 @@ export default function PricingPage() {
             <span className="text-amber-400">medical courier pricing</span>
           </h1>
           <p className="text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
-            Contracted routes from $9/delivery for pharmacies and LTC facilities.
-            On-demand same-day runs from $20. No fuel surcharges, no hidden fees.
+            On-demand: $16 base + $0.90/km — you pay for what we drive, nothing more.
+            Contracted routes from $9/delivery for pharmacies and LTC. No fuel surcharges, no hidden fees.
           </p>
         </div>
       </section>
@@ -197,17 +197,23 @@ export default function PricingPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
             <p className="text-[var(--color-brand-blue)] text-xs font-black uppercase tracking-[0.18em] mb-3">On-Demand Rates</p>
-            <h2 className="text-4xl font-black text-[var(--color-text)]">One flat rate, anywhere in Edmonton</h2>
+            <h2 className="text-4xl font-black text-[var(--color-text)]">$16 base + $0.90 per kilometre</h2>
             <p className="text-[var(--color-text-muted)] mt-3 max-w-xl">
-              On-demand deliveries are a single flat rate per zone — no mileage calculation, no guesswork.
-              North, south, east, or west Edmonton all cost the same.
+              Simple, transparent per-km pricing. You only pay for the distance we drive — no zone guessing, no flat-rate surprises for short runs.
             </p>
+            <div className="mt-4 inline-flex items-center gap-3 bg-[var(--color-brand-blue-pale)] border border-blue-200 rounded-2xl px-5 py-3">
+              <span className="text-2xl font-black text-[var(--color-brand-navy)]">$16</span>
+              <span className="text-[var(--color-text-muted)] font-medium">base</span>
+              <span className="text-[var(--color-brand-blue)] font-black text-lg">+</span>
+              <span className="text-2xl font-black text-[var(--color-brand-navy)]">$0.90</span>
+              <span className="text-[var(--color-text-muted)] font-medium">× km</span>
+            </div>
           </div>
           <div className="bg-white rounded-3xl border border-[var(--color-border)] overflow-hidden shadow-sm">
             <div className="grid grid-cols-4 text-xs font-black uppercase tracking-widest bg-[#F8FAFC] border-b border-[var(--color-border)] text-[var(--color-text-muted)]">
-              <div className="p-4">Zone</div>
-              <div className="p-4 col-span-2">Coverage</div>
-              <div className="p-4 text-right">Est. Time / Rate</div>
+              <div className="p-4">Distance</div>
+              <div className="p-4 col-span-2">Typical Route</div>
+              <div className="p-4 text-right">Est. Time / Price</div>
             </div>
             {ON_DEMAND_ZONES.map((row, i) => (
               <div
@@ -228,10 +234,10 @@ export default function PricingPage() {
           </div>
           <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <p className="text-xs text-[var(--color-text-muted)]">
-              * On-demand rates. Cold-chain, biohazard, STAT, and after-hours add-ons apply separately below.
+              * On-demand rates. STAT (+$25), cold-chain, biohazard, and after-hours add-ons apply separately.
             </p>
             <p className="text-xs font-semibold text-[var(--color-brand-blue)]">
-              Pharmacy or LTC? Contracted routes start from $9/delivery →{" "}
+              Pharmacy or LTC? Contracted routes from $9/delivery →{" "}
               <Link href="/partner" className="underline">Get a rate card</Link>
             </p>
           </div>

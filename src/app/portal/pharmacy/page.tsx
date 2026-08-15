@@ -113,14 +113,7 @@ export default function PharmacyPortalPage() {
       const res  = await fetch("/api/portal/pharmacy-order", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({
-          code:            codeInput,
-          pharmacyName:    "_verify_",
-          pharmacyAddress: "_verify_",
-          patientName:     "_verify_",
-          deliveryAddress: "_verify_",
-          deliveryCity:    "Edmonton",
-        }),
+        body:    JSON.stringify({ code: codeInput, _verifyOnly: true }),
       });
       const json = await res.json();
       if (res.status === 401) {
