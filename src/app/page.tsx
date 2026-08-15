@@ -28,7 +28,6 @@ const services = [
     id: "rx",
     icon: Package,
     title: "Prescription Delivery",
-    price: "$35",
     desc: "Pharmacy-to-patient medication transport. Temperature-controlled, chain-of-custody documented.",
     href: "/services#rx",
     gradient: "from-blue-600 to-blue-400",
@@ -40,7 +39,6 @@ const services = [
     id: "specimen",
     icon: FlaskConical,
     title: "Specimen Transport",
-    price: "$55",
     desc: "Time-sensitive biological samples with documented chain of custody from clinic to lab.",
     href: "/services#specimens",
     gradient: "from-indigo-600 to-sky-400",
@@ -52,7 +50,6 @@ const services = [
     id: "rush",
     icon: Truck,
     title: "Same-Day Rush / STAT",
-    price: "$85",
     desc: "Urgent dispatch within the hour. Because timing saves lives.",
     href: "/services#rush",
     gradient: "from-orange-500 to-red-500",
@@ -64,7 +61,6 @@ const services = [
     id: "cold",
     icon: Thermometer,
     title: "Cold Chain / Vaccines",
-    price: "$55+",
     desc: "Biologics, vaccines & insulin with 2–8°C precision handling.",
     href: "/services#cold",
     gradient: "from-cyan-600 to-blue-500",
@@ -76,7 +72,6 @@ const services = [
     id: "iv",
     icon: Heart,
     title: "IV & Infusion Delivery",
-    price: "$55",
     desc: "IV bags, infusion supplies & LTC medication, same-day.",
     href: "/services#iv",
     gradient: "from-rose-600 to-pink-400",
@@ -88,7 +83,6 @@ const services = [
     id: "ltc",
     icon: Building2,
     title: "Long-Term Care Runs",
-    price: "Route",
     desc: "Scheduled daily / weekly routes to nursing homes & assisted-living facilities.",
     href: "/services#ltc",
     gradient: "from-teal-600 to-emerald-400",
@@ -100,7 +94,6 @@ const services = [
     id: "documents",
     icon: FileText,
     title: "Medical Records",
-    price: "$35",
     desc: "Confidential transport for medical records, lab reports & clinical files.",
     href: "/services#documents",
     gradient: "from-slate-600 to-slate-400",
@@ -112,7 +105,6 @@ const services = [
     id: "equipment",
     icon: AlertCircle,
     title: "Medical Equipment",
-    price: "$35+",
     desc: "Devices, supplies & equipment safely delivered to clinics and care facilities.",
     href: "/services#equipment",
     gradient: "from-violet-600 to-purple-400",
@@ -124,7 +116,6 @@ const services = [
     id: "returns",
     icon: RefreshCw,
     title: "Pharmaceutical Returns",
-    price: "$35",
     desc: "Expired medications, product recalls & controlled substance returns — compliantly handled.",
     href: "/services#returns",
     gradient: "from-amber-600 to-yellow-400",
@@ -367,10 +358,6 @@ export default function HomePage() {
                       className="object-cover mix-blend-overlay opacity-40 group-hover:opacity-55 group-hover:scale-105 transition-all duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                    {/* Price chip */}
-                    <div className="absolute top-3 right-3 bg-white/20 backdrop-blur-sm border border-white/30 text-white text-xs font-black px-2.5 py-1 rounded-full">
-                      {svc.price}
-                    </div>
                     <div className="absolute bottom-3 left-4">
                       <div className="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                         <Icon size={18} className="text-white" />

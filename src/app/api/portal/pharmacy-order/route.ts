@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { buildOrderPayload, createOrder } from "@/lib/shipday";
+import { createCoC } from "@/lib/coc";
 
 function validateCode(code: string): boolean {
   const portalCode = process.env.PHARMACY_PORTAL_CODE;
@@ -22,6 +23,7 @@ async function sendNotificationEmail(data: {
   deliveryTime: string;
   temperatureSensitive: boolean;
   trackingLink: string;
+  cocUrl: string;
 }) {
   if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) return;
 
@@ -39,11 +41,17 @@ async function sendNotificationEmail(data: {
         </p>
       </div>
 
-      ${data.trackingLink ? `
-      <div style="background:#EBF3FF;border:1px solid #1B6FEB;border-radius:10px;padding:12px 16px;margin-bottom:16px;text-align:center;">
-        <p style="margin:0 0 4px 0;font-weight:700;color:#0D1B3E;font-size:13px;">📍 Live Tracking</p>
-        <a href="${data.trackingLink}" style="color:#1B6FEB;font-size:12px;">${data.trackingLink}</a>
-      </div>` : ""}
+      <div style="display:flex;gap:12px;margin-bottom:16px;">
+        ${data.trackingLink ? `
+        <div style="flex:1;background:#EBF3FF;border:1px solid #1B6FEB;border-radius:10px;padding:12px 16px;text-align:center;">
+          <p style="margin:0 0 4px 0;font-weight:700;color:#0D1B3E;font-size:13px;">📍 Live Tracking</p>
+          <a href="${data.trackingLink}" style="color:#1B6FEB;font-size:11px;word-break:break-all;">${data.trackingLink}</a>
+        </div>` : ""}
+        <div style="flex:1;background:#F0FDF4;border:1px solid #22C55E;border-radius:10px;padding:12px 16px;text-align:center;">
+          <p style="margin:0 0 4px 0;font-weight:700;color:#14532D;font-size:13px;">📋 Chain of Custody</p>
+          <a href="${data.cocUrl}" style="color:#16A34A;font-size:11px;word-break:break-all;">${data.cocUrl}</a>
+        </div>
+      </div>
 
       <table style="width:100%;border-collapse:collapse;background:white;border-radius:12px;overflow:hidden;border:1px solid #C8E1F8;margin-bottom:16px;">
         <thead><tr style="background:#1B6FEB;"><th colspan="2" style="color:white;padding:12px 16px;text-align:left;font-size:13px;">💊 PHARMACY (PICKUP)</th></tr></thead>
@@ -130,9 +138,11 @@ export async function POST(req: NextRequest) {
     pharmacyAddress,
     pharmacyCity,
     pharmacyPhone,
+    pharmacyEmail,
     pharmacistName,
     patientName,
     patientPhone,
+    patientEmail,
     deliveryAddress,
     deliveryCity,
     medicationNotes,
@@ -155,6 +165,33 @@ export async function POST(req: NextRequest) {
   const orderNumber = `SMC-${Date.now()}`;
   const serviceType = urgency === "stat" ? "rush" : "prescription";
   const timeSlot    = urgency === "stat" ? "asap" : deliveryTime ?? "morning";
+
+  // Create chain of custody record
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? `https://${process.env.VERCEL_URL ?? "speedomedic.ca"}`;
+  const cocUrl  = `${siteUrl}/coc/${orderNumber}`;
+  if (process.env.KV_REST_API_URL) {
+    try {
+      await createCoC({
+        orderNumber,
+        pharmacyName:   pharmacyName   ?? "",
+        pharmacyAddress: pharmacyAddress ?? "",
+        pharmacyCity:   pharmacyCity   ?? "Edmonton",
+        pharmacyPhone:  pharmacyPhone  ?? "",
+        pharmacyEmail:  pharmacyEmail  ?? "",
+        pharmacistName: pharmacistName ?? "",
+        patientName:    patientName    ?? "",
+        patientAddress: deliveryAddress ?? "",
+        patientCity:    deliveryCity   ?? "",
+        patientPhone:   patientPhone   ?? "",
+        patientEmail:   patientEmail   ?? "",
+        medications:    medicationNotes ?? "",
+        urgency:        urgency        ?? "standard",
+        coldChain:      temperatureSensitive ?? false,
+      });
+    } catch (err) {
+      console.error("[COC CREATE ERROR]", err);
+    }
+  }
 
   let trackingLink = "";
 
@@ -181,7 +218,11 @@ export async function POST(req: NextRequest) {
         temperatureSensitive: temperatureSensitive ?? false,
       });
 
-      const result = await createOrder({ ...payload, orderNumber });
+      const result = await createOrder({
+        ...payload,
+        orderNumber,
+        notes: `Chain of Custody: ${cocUrl}`,
+      });
       trackingLink = result.trackingLink ?? "";
     } catch (err) {
       console.error("[PHARMACY SHIPDAY ERROR]", err);
@@ -206,10 +247,11 @@ export async function POST(req: NextRequest) {
       deliveryTime:        deliveryTime ?? "",
       temperatureSensitive: temperatureSensitive ?? false,
       trackingLink,
+      cocUrl,
     });
   } catch (err) {
     console.error("[PHARMACY EMAIL ERROR]", err);
   }
 
-  return NextResponse.json({ ok: true, orderNumber, trackingLink });
+  return NextResponse.json({ ok: true, orderNumber, trackingLink, cocUrl });
 }
