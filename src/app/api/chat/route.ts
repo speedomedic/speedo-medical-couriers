@@ -24,8 +24,9 @@ Edmonton (all neighbourhoods), St. Albert, Sherwood Park, Leduc, Beaumont, Spruc
 
 ## PRICING — YOU KNOW THIS IN FULL
 
-### On-Demand (pay per delivery, no commitment)
+### One rate for everyone — pharmacies, clinics, patients, one-off runs
 Formula: **$16 base + $0.90 per kilometre** from pickup to dropoff.
+This applies to every delivery regardless of whether they are a pharmacy, clinic, or individual.
 
 Example prices:
 - 5 km (local / downtown): $20.50
@@ -42,14 +43,6 @@ Example prices:
 - Signature + ID verification: +$5
 - Return trip (pickup and drop): +50% of total
 - Extra pickup stop: +$10/stop
-
-### Contracted Route (pharmacies, LTC, labs — negotiated monthly)
-Market rate in Edmonton is $9–$14/delivery on a contracted route, depending on volume and stops per run.
-The economics: one courier doing 15 stops in a loop at $9 each = $135/run. This only works at volume — single deliveries are always on-demand.
-
-Key insight: chains like Shoppers pay around $8–$10/delivery through corporate contracts. Independent pharmacies typically pay $11–$14. Position against that: "Same price, but we do photo proof, chain of custody, and cold-chain that general couriers don't."
-
-Do NOT show route pricing publicly — it's negotiated per account. When someone asks, say: "Route pricing starts from $9/delivery and is built around your volume — let me get you a custom rate card."
 
 ### Enterprise
 Custom SLA-backed contract for multi-site or high-volume organizations. STAT under 30 min guaranteed. Direct them to call or /partner page.

@@ -1,56 +1,33 @@
 import Link from "next/link";
-import { CheckCircle, ArrowRight, Phone, Zap, RefreshCw, Building2, Info } from "lucide-react";
+import { CheckCircle, ArrowRight, Phone, Zap, Building2 } from "lucide-react";
 import PriceCalculator from "@/components/PriceCalculator";
 
 export const metadata = {
   title: "Pricing | Speedo Medical Couriers",
-  description: "Medical courier pricing in Edmonton. On-demand: $16 base + $0.90/km. Contracted pharmacy routes from $9/delivery. No fuel surcharges, no hidden fees.",
+  description: "Medical courier pricing in Edmonton. $16 base + $0.90/km for every delivery — pharmacies, clinics, one-off runs. No fuel surcharges, no hidden fees.",
 };
 
 const TIERS = [
   {
-    icon: RefreshCw,
-    name: "Contracted Route",
-    tagline: "Pharmacies, LTC facilities & labs",
-    badge: "Most Popular",
-    badgeColor: "bg-[var(--color-brand-blue)] text-white",
-    price: "From $9",
-    priceSub: "per delivery on a contracted route",
-    color: "border-[var(--color-brand-blue)]",
-    highlight: true,
-    note: "Exact rate depends on your delivery volume, stops, and geography. We build a custom rate card — call to get yours.",
-    features: [
-      "Daily or weekly fixed routes",
-      "Same courier every run",
-      "Photo proof of delivery on every drop",
-      "Chain-of-custody documentation",
-      "Cold-chain & specimen handling included",
-      "Monthly consolidated invoicing",
-      "Lower per-delivery cost as volume grows",
-      "30-day cancellation — no long-term lock-in",
-    ],
-    cta: "Get a Route Quote",
-    href: "/partner",
-  },
-  {
     icon: Zap,
-    name: "On-Demand",
-    tagline: "One-off runs, no commitment",
-    badge: null,
+    name: "Standard Delivery",
+    tagline: "Pharmacies, clinics, patients & one-off runs",
+    badge: "Every Delivery",
+    badgeColor: "bg-[var(--color-brand-blue)] text-white",
     price: "$16 + $0.90/km",
     priceSub: "base rate + per kilometre",
-    color: "border-[var(--color-border)]",
-    highlight: false,
+    color: "border-[var(--color-brand-blue)]",
+    highlight: true,
     note: null,
     features: [
       "Book online or by phone, any time",
       "Pickup within 2 hours",
       "Live GPS tracking",
       "Photo proof of delivery",
+      "Chain-of-custody documentation",
+      "Cold-chain & specimen handling available",
       "No monthly minimum",
-      "Pay-per-delivery invoicing",
-      "Extends to St. Albert, Sherwood Park & more",
-      "STAT rush available",
+      "STAT rush available (+$25)",
     ],
     cta: "Book a Delivery",
     href: "/book",
@@ -113,33 +90,16 @@ export default function PricingPage() {
             <span className="text-amber-400">medical courier pricing</span>
           </h1>
           <p className="text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
-            On-demand: $16 base + $0.90/km — you pay for what we drive, nothing more.
-            Contracted routes from $9/delivery for pharmacies and LTC. No fuel surcharges, no hidden fees.
+            One simple rate for everyone — pharmacies, clinics, patients.
+            $16 base + $0.90/km. You pay for what we drive, nothing more. No fuel surcharges, no hidden fees.
           </p>
-        </div>
-      </section>
-
-      {/* Two-track explainer */}
-      <section className="py-10 bg-amber-50 border-b border-amber-200">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-start gap-4">
-            <Info size={18} className="text-amber-600 flex-shrink-0 mt-0.5" />
-            <div>
-              <p className="text-sm font-black text-amber-900 mb-1">Two types of clients, two pricing tracks</p>
-              <p className="text-sm text-amber-800 leading-relaxed">
-                <strong>Pharmacies, LTC facilities, and labs</strong> that need recurring daily or weekly routes get contracted pricing — from $9/delivery, built around your volume.
-                {" "}<strong>Clinics, patients, and one-off needs</strong> use on-demand pricing — a flat rate per run with no commitment.
-                Not sure which applies? <a href="tel:7808070000" className="font-bold underline">Call us</a> and we'll tell you in 2 minutes.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* Plan tiers */}
       <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-6">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-6">
             {TIERS.map((tier) => {
               const Icon = tier.icon;
               return (
@@ -232,13 +192,9 @@ export default function PricingPage() {
               </div>
             ))}
           </div>
-          <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <div className="mt-4">
             <p className="text-xs text-[var(--color-text-muted)]">
-              * On-demand rates. STAT (+$25), cold-chain, biohazard, and after-hours add-ons apply separately.
-            </p>
-            <p className="text-xs font-semibold text-[var(--color-brand-blue)]">
-              Pharmacy or LTC? Contracted routes from $9/delivery →{" "}
-              <Link href="/partner" className="underline">Get a rate card</Link>
+              * STAT (+$25), cold-chain, biohazard, and after-hours add-ons apply separately on top of the base rate.
             </p>
           </div>
         </div>
@@ -253,8 +209,8 @@ export default function PricingPage() {
               Calculate your on-demand cost
             </h2>
             <p className="text-[var(--color-text-muted)] mt-3 max-w-lg mx-auto">
-              Adjust the inputs to see a real-time estimate for on-demand deliveries.
-              Contracted route pricing is lower — the estimate shows you what you save by committing to a route.
+              Adjust the inputs to see a real-time estimate for your delivery.
+              Same rate whether you book once or run a daily route.
             </p>
           </div>
           <PriceCalculator />
@@ -287,28 +243,28 @@ export default function PricingPage() {
           <div className="space-y-4">
             {[
               {
-                q: "What does a contracted route actually cost for a pharmacy?",
-                a: "It depends on your delivery volume and geography. Pharmacies doing daily routes within Edmonton typically land between $9–$14 per delivery once we account for their stop count and schedule. The more deliveries per run, the lower your per-delivery cost. Call us and we'll quote you in one conversation.",
-              },
-              {
-                q: "Why is on-demand more expensive than a contracted route?",
-                a: "A contracted route lets us plan a courier's day efficiently — one driver, 15 stops, one loop. On-demand is a single trip dispatched in real time, which costs more to operate. Pharmacies doing consistent volume always save significantly by switching to a contracted route.",
+                q: "Is the rate really the same for pharmacies and one-off bookings?",
+                a: "Yes — $16 base + $0.90/km for every delivery, whether you book once or run a daily route. No separate contracted pricing, no volume tiers. Same transparent rate for everyone.",
               },
               {
                 q: "Are there fuel surcharges or hidden fees?",
-                a: "No. Our rates are all-in — fuel, insurance, and courier labour included. The price we quote is the price you pay.",
+                a: "No. Our rates are all-in — fuel, insurance, and courier labour included. The price you calculate is the price you pay.",
               },
               {
-                q: "Is there a minimum spend or long-term contract?",
-                a: "On-demand has no minimum. Contracted routes require 30-day notice to cancel — no long-term lock-in.",
+                q: "Is there a minimum spend or commitment?",
+                a: "No minimum, no long-term commitment. Book when you need it.",
               },
               {
                 q: "Do you charge extra for weekends?",
-                a: "Weekend deliveries are at standard rates. After-hours deliveries (8 pm – 7 am) carry a $15 surcharge. Call to confirm availability and rates for holidays.",
+                a: "Weekend deliveries are at standard rates. After-hours deliveries (8 pm – 7 am) carry a $15 surcharge. Call to confirm availability on holidays.",
               },
               {
-                q: "Can I get a written quote before committing?",
-                a: "Yes — register as a partner and we'll send a custom rate card within 24 hours. No obligation.",
+                q: "What counts as a STAT rush?",
+                a: "STAT adds a $25 surcharge and guarantees pickup within 60 minutes. Select it when booking or call 780-807-0000 to dispatch immediately.",
+              },
+              {
+                q: "Can I get an invoice for regular pharmacy deliveries?",
+                a: "Yes — we can set up consolidated monthly invoicing for pharmacies and clinics. Call or email to arrange.",
               },
             ].map(({ q, a }) => (
               <div key={q} className="bg-[#F8FAFC] rounded-2xl p-6 border border-[var(--color-border)]">
